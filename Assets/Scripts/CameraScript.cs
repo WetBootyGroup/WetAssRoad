@@ -34,11 +34,12 @@ public class CameraScript : MonoBehaviour
 
         if(Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(new Vector3(playerspeed * Time.deltaTime,0,0));
+            GetComponent<Rigidbody>().velocity = new Vector3(playerspeed,0,0);
         }
         if(Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(new Vector3(-playerspeed * Time.deltaTime,0,0));
+            GetComponent<Rigidbody>().velocity = new Vector3(-playerspeed,0,0);
+            //transform.Translate(new Vector3(-playerspeed * Time.deltaTime,0,0));
         }
      
     }
