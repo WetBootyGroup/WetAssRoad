@@ -10,11 +10,10 @@ public class CameraScript : MonoBehaviour
 
 
     void OnCollisionEnter(Collision collision) 
-{
-    
-        if(collision.gameObject.name == "Cube")  // or if(gameObject.CompareTag("YourWallTag"))
+{   
+        if(collision.collider.tag == "Roadside") 
         {
-            Debug.Log(GetComponent<Rigidbody>().velocity);
+            Debug.Log("HIT");
              GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 }
