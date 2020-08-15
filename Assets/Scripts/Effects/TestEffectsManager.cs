@@ -1,15 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Effects;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TestEffectsManager : MonoBehaviour
+namespace Effects
 {
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(EffectsManager))]
+    public class TestEffectsManager : MonoBehaviour
     {
-        EffectsManager effectsManager = GetComponent<EffectsManager>();
-        PuddleArgument argument = new PuddleArgument();
-        effectsManager.ProducePuddleEffect(argument);
+        public EffectsManager effectManager;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            if (effectManager == null)
+            {
+                effectManager = GetComponent<EffectsManager>();
+            }
+        }
     }
 }

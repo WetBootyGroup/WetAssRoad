@@ -46,6 +46,12 @@ namespace Effects
                 script.StartEffect();
             }
         }
+
+        public void ProduceShakeEffect(ShakeArgument shakeArgument)
+        {
+            // todo: do shake effect
+            Debug.Log("Shake here");
+        }
     }
 
     // better used as struct
@@ -63,5 +69,11 @@ namespace Effects
         
         // Do not touch
         public EffectsManager effectsManager = null;
+    }
+    
+    // better used as a struct
+    public class ShakeArgument
+    {
+        
     }
 }
