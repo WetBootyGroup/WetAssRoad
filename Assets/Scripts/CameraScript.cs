@@ -9,13 +9,21 @@ public class CameraScript : MonoBehaviour
     public Transform groundTrans;
 
 
+    void OnCollisionEnter(Collision collision) 
+{
+    
+        if(collision.gameObject.name == "Cube")  // or if(gameObject.CompareTag("YourWallTag"))
+        {
+            Debug.Log(GetComponent<Rigidbody>().velocity);
+             GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+}
     // Start is called before the first frame update
     void Start()
     {
        float width = groundTrans.localScale.x;
        float center = width/2;
        print(center);
-        
     }
 
     // Update is called once per frame
