@@ -16,12 +16,14 @@ namespace Effects
         public GameObject puddleEffectPrefab;
 
         private Transform _cameraTransform;
+        private CameraEffects _cameraEffects;
 
         private void Awake()
         {
             if (Camera.main != null)
             {
                 _cameraTransform = Camera.main.transform;
+                _cameraEffects = _cameraTransform.GetComponent<CameraEffects>();
             }
             else
             {
@@ -50,11 +52,12 @@ namespace Effects
         public void ProduceShakeEffect(ShakeArgument shakeArgument)
         {
             // todo: do shake effect
-            Debug.Log("Shake here");
+            _cameraEffects.Shake(new ShakeArgument());
         }
     }
 
     // better used as struct
+    [Serializable]
     public class PuddleArgument
     {
         // todo: if need arguments to change effects put it here
@@ -72,8 +75,16 @@ namespace Effects
     }
     
     // better used as a struct
+    [Serializable]
     public class ShakeArgument
     {
+        // Min duration of shake
+        public float minDuration = 1.0f;
         
+        // Max duration of shake
+        public float maxDuration = 5.0f;
+        
+        // Perlin noise scale
+        public Vector2 noiseScale = new Vector2(3f, 5f);
     }
 }
