@@ -86,5 +86,8 @@ namespace Effects
         
         // Perlin noise scale
         public Vector2 noiseScale = new Vector2(3f, 5f);
+        
+        // Shake speed
+        public Vector2 shakeSpeed = new Vector2(3f, 2f);
     }
 }
