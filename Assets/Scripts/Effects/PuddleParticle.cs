@@ -64,8 +64,7 @@ public class PuddleParticle : MonoBehaviour
             case State.Spawning:
                 elapsedTime = Time.time - _timeStart;
                 
-                transform.position = _cameraTransform.position 
-                                     + Vector3.Lerp(_startRelativePosition,
+                transform.localPosition = Vector3.Lerp(_startRelativePosition,
                                     _targetRelativePosition,
                                     elapsedTime / spawnDuration);
                 // todo: replace lerp
@@ -76,7 +75,7 @@ public class PuddleParticle : MonoBehaviour
                 {
                     _timeStart = _timeDistracting;
                     _state = State.Distracting;
-                    transform.position = _cameraTransform.position + _targetRelativePosition;
+                    transform.localPosition = _targetRelativePosition;
                     // todo
                 }
                 break;
@@ -85,7 +84,7 @@ public class PuddleParticle : MonoBehaviour
                 elapsedTime = Time.time - _timeDistracting;
                 
                 _dripDisplacement = Time.deltaTime * dripSpeed;
-                transform.position -= new Vector3(
+                transform.localPosition -= new Vector3(
                     0,
                     _dripDisplacement,
                     0);
@@ -94,7 +93,7 @@ public class PuddleParticle : MonoBehaviour
                     color.r,
                     color.g,
                     color.b,
-                    1 - elapsedTime/lifespanDuration);
+                    1f - elapsedTime/lifespanDuration);
                 _spriteRenderer.color = color;
 
                 if (elapsedTime > lifespanDuration)
@@ -126,8 +125,8 @@ public class PuddleParticle : MonoBehaviour
         }
         
         _targetRelativePosition = new Vector3(
-                maxTranslation.x * Random.value * (Random.value > 0.5 ? -1 : 1),
-                maxTranslation.y * Random.value * (Random.value > 0.5 ? -1 : 1),
+                maxTranslation.x * Random.value * (Random.value > 0.5f ? -1 : 1),
+                maxTranslation.y * Random.value * (Random.value > 0.5f ? -1 : 1),
                 ZValue
                 );
         _startRelativePosition = new Vector3(0, StartYValue, ZValue + 10);
@@ -142,5 +141,9 @@ public class PuddleParticle : MonoBehaviour
     {
         // todo
         _cameraTransform = transform.parent.transform;
+        lifespanDuration = Random.Range(argument.minDuration, argument.maxDuration);
+        Transform objectTransform = transform;
+        objectTransform.localScale *= Random.Range(0.5f,1.7f);
+        transform.Rotate(transform.forward, Random.Range(1f,179f));
     }
 }

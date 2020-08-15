@@ -58,6 +58,9 @@ namespace Effects
         // Max duration of splat in seconds
         public float maxDuration = 10.0f;
         
+        // Max duration of splat in seconds
+        public float minDuration = 5.0f;
+        
         // Do not touch
         public EffectsManager effectsManager = null;
     }
