@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlTypes;
+using Effects;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
-public class SplatParticle : MonoBehaviour
+public class PuddleParticle : MonoBehaviour
 {
     [Description("Max random object translation on the screen")]
     public Vector3 maxTranslation = new Vector3(5,5,5);
@@ -29,7 +30,7 @@ public class SplatParticle : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     
     private const float ZValue = 22;
-    private const float StartYValue = -22;
+    private const float StartYValue = -31;
 
     private enum State
     {
@@ -63,9 +64,10 @@ public class SplatParticle : MonoBehaviour
             case State.Spawning:
                 elapsedTime = Time.time - _timeStart;
                 
-                transform.position = Vector3.Lerp(_startRelativePosition,
-                    _targetRelativePosition,
-                    elapsedTime / spawnDuration);
+                transform.position = _cameraTransform.position 
+                                     + Vector3.Lerp(_startRelativePosition,
+                                    _targetRelativePosition,
+                                    elapsedTime / spawnDuration);
                 // todo: replace lerp
                 // todo: replace with speed varying spawnDuration
                 // calc by t = d / v
@@ -74,7 +76,7 @@ public class SplatParticle : MonoBehaviour
                 {
                     _timeStart = _timeDistracting;
                     _state = State.Distracting;
-                    transform.position = _targetRelativePosition;
+                    transform.position = _cameraTransform.position + _targetRelativePosition;
                     // todo
                 }
                 break;
@@ -87,7 +89,13 @@ public class SplatParticle : MonoBehaviour
                     0,
                     _dripDisplacement,
                     0);
-                _spriteRenderer.color = new Color(1f,1f,1f,(1 - elapsedTime/lifespanDuration));
+                Color color = _spriteRenderer.color;
+                color = new Color(
+                    color.r,
+                    color.g,
+                    color.b,
+                    1 - elapsedTime/lifespanDuration);
+                _spriteRenderer.color = color;
 
                 if (elapsedTime > lifespanDuration)
                 {
@@ -122,7 +130,7 @@ public class SplatParticle : MonoBehaviour
                 maxTranslation.y * Random.value * (Random.value > 0.5 ? -1 : 1),
                 ZValue
                 );
-        _startRelativePosition = new Vector3(0, StartYValue, ZValue);
+        _startRelativePosition = new Vector3(0, StartYValue, ZValue + 10);
 
         _timeStart = Time.time;
         _timeDistracting = _timeStart + spawnDuration;
@@ -130,8 +138,9 @@ public class SplatParticle : MonoBehaviour
         _state = State.Spawning;
     }
 
-    public void SetCameraTransform(Transform cameraTransform)
+    public void ApplyEffect(PuddleArgument argument)
     {
-        _cameraTransform = cameraTransform;
+        // todo
+        _cameraTransform = transform.parent.transform;
     }
 }
