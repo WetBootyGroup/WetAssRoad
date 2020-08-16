@@ -11,6 +11,7 @@ public class ProgressManager : MonoBehaviour
 
     // time
     public Text timeText;
+    public Text pussyCount;
     public bool timeRanOut = false;
     public float gameTime = 60;
 
@@ -47,7 +48,7 @@ public class ProgressManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        while(timeRanOut == false){
+        if (timeRanOut == false){
             if(gameTime > 0){
 
                 gameTime -= Time.deltaTime;
@@ -64,6 +65,7 @@ public class ProgressManager : MonoBehaviour
             }
         }
 
+        pussyCount.text = killCount.ToString();
     }
 
     public void IncreaseKillCount() {
