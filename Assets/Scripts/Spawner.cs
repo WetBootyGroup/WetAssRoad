@@ -29,8 +29,9 @@ public class Spawner : MonoBehaviour
 
     void SpawnObstacle() {
         float randX = Random.Range(-15 ,15);
-        Vector3 spawnLocation = new Vector3(randX, 0, 0);
-        GameObject toSpawn = spawnables[(Random.Range(0,3)) % 3];
+        Vector3 spawnLocation = transform.position;
+            spawnLocation.x = randX;
+        GameObject toSpawn = spawnables[(Random.Range(0,4)) % 4];
         Instantiate(toSpawn, spawnLocation, Quaternion.identity);
     }
 }
