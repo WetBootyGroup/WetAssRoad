@@ -7,7 +7,8 @@ public class CollisionDetection : MonoBehaviour
     private void OnTriggerEnter (Collider other)
     {
         if (other.gameObject.CompareTag("Crashable")) {
-            Debug.Log("Crashed into wet pussy/pothole/puddle");
+            ICrashable c = other.gameObject.GetComponent<ICrashable>();
+            c.onCrash();
         }
     }
 }
