@@ -72,6 +72,7 @@ namespace Effects
         public float minDuration = 5.0f;
         
         // Do not touch
+        [HideInInspector]
         public EffectsManager effectsManager = null;
     }
     
