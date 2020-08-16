@@ -36,5 +36,12 @@ public class Pothole : MonoBehaviour, ICrashable
         
         // you can have your custom arguments, too!
         _effectsManager.ProduceShakeEffect();
+
+        StartCoroutine(destroyOnCrash());
+    }
+
+    IEnumerator destroyOnCrash() {
+        yield return new WaitForSeconds(2);
+        Destroy(this.gameObject);
     }
 }
