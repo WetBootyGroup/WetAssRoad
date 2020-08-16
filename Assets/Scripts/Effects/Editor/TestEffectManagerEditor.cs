@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(TestEffectsManager))]
-public class EventEditor : Editor
+public class TestEffectManagerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -15,13 +15,18 @@ public class EventEditor : Editor
         EffectsManager effectsManager = e.effectManager;
         
         if (GUILayout.Button("Produce puddle effect"))
-        {
-            effectsManager.ProducePuddleEffect(new PuddleArgument());
+        {;
+            effectsManager.ProducePuddleEffect(e.puddleArgument);
         }
 
         if (GUILayout.Button("Produce shake effect"))
         {
-            effectsManager.ProduceShakeEffect(new ShakeArgument());
+            effectsManager.ProduceShakeEffect(e.shakeArgument);
+        }
+
+        if (GUILayout.Button("Produce cat sound effect"))
+        {
+            effectsManager.ProduceCatSound(e.transform);
         }
     }
 }

@@ -11,9 +11,21 @@ namespace Effects
     {
         [Tooltip("Count when no count applied in argument")]
         public int noCountArgMax = 5;
-        
-        [Header("Required")]
+
+        [Header("Required")] 
+        public EffectsManagerLocator locator;
         public GameObject puddleEffectPrefab;
+        public GameObject catAudioPrefab;
+        public GameObject puddleAudioPrefab;
+        
+        [Header("Arguments")]
+        public AudioArgument catAudioArgument;
+        public AudioArgument puddleAudioArgument;
+
+        [Header("Optional arguments")] 
+        public ShakeArgument shakeArgument;
+
+        public PuddleArgument puddleArgument;
 
         private Transform _cameraTransform;
         private CameraEffects _cameraEffects;
@@ -29,6 +41,15 @@ namespace Effects
             {
                 Debug.LogError("No camera found in effects manager");
             }
+            
+            Assert.IsNotNull(catAudioPrefab, "Cat Audio Argument is null in " + name);
+
+            locator.SetEffectsManager(this);
+        }
+
+        private void OnDestroy()
+        {
+            locator.SetEffectsManager(null);
         }
 
         public void ProducePuddleEffect(PuddleArgument argument)
@@ -40,19 +61,45 @@ namespace Effects
                 argument.Count = Random.Range(1, noCountArgMax + 1);
             }
 
+            AudioObject audioObject = Instantiate(puddleAudioPrefab)
+                .GetComponent<AudioObject>();
+            audioObject.StartAudio(catAudioArgument);
+            
             for (int i = 0; i < argument.Count; i++)
             {
-                PuddleParticle script = Instantiate(puddleEffectPrefab, _cameraTransform)
+                PuddleParticle script = Instantiate(puddleEffectPrefab, _cameraTransform.position,
+                        _cameraTransform.rotation, _cameraTransform)
                     .GetComponent<PuddleParticle>();
                 script.ApplyEffect(argument);
                 script.StartEffect();
             }
         }
 
-        public void ProduceShakeEffect(ShakeArgument shakeArgument)
+        public void ProducePuddleEffect()
         {
-            // todo: do shake effect
-            _cameraEffects.Shake(new ShakeArgument());
+            ProducePuddleEffect(puddleArgument);
+        }
+
+        public void ProduceShakeEffect(ShakeArgument argument)
+        {
+            _cameraEffects.Shake(argument);
+        }
+
+        public void ProduceShakeEffect()
+        {
+            _cameraEffects.Shake(shakeArgument);
+        }
+
+        public void ProduceCatSound(Transform source, AudioArgument argument)
+        {
+            AudioObject audioObject = Instantiate(catAudioPrefab, source.position, source.rotation)
+                .GetComponent<AudioObject>();
+            audioObject.StartAudio(argument);
+        }
+
+        public void ProduceCatSound(Transform source)
+        {
+            ProduceCatSound(source, catAudioArgument);
         }
     }
 
@@ -71,6 +118,7 @@ namespace Effects
         public float minDuration = 5.0f;
         
         // Do not touch
+        [HideInInspector]
         public EffectsManager effectsManager = null;
     }
     
@@ -83,11 +131,18 @@ namespace Effects
         
         // Max duration of shake
         public float maxDuration = 5.0f;
-        
-        // Perlin noise scale
-        public Vector2 noiseScale = new Vector2(3f, 5f);
-        
-        // Shake speed
-        public Vector2 shakeSpeed = new Vector2(3f, 2f);
+
+        [Tooltip("Vertical displacement speed")]
+        public float bounceSpeed = 5.0f;
+
+        [Tooltip("Vertical displacement maximum")]
+        public float bounceMax = 0.25f;
+
+        [Tooltip("The max angular change via noise")]
+        public float rotationSpeed = 1.0f;
+
+        [Tooltip("The max rotation magnitude around the z-axis. Don't do max please")]
+        [Range(0f,179f)]
+        public float rotationMax = 15f;
     }
 }
