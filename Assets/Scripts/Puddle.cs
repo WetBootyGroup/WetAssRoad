@@ -7,14 +7,16 @@ public class Puddle : MonoBehaviour, ICrashable
     public float moveSpeed;
 
     Transform carRef;
+    ProgressManager progressManagerRef;
 
     void Start()
     {
         carRef = GameObject.Find("Car").transform;
+        progressManagerRef = GameObject.Find("ProgressManager").GetComponent<ProgressManager>();
     }
 
     void FixedUpdate () {
-        transform.Translate(new Vector3(0,0,-1 * moveSpeed * Time.deltaTime));
+        transform.Translate(new Vector3(0,0,-1 * progressManagerRef.GetGameSpeed() * Time.deltaTime));
 
         if (Mathf.Abs(transform.position.z - carRef.position.z) <= 0.01) {//!!!!!!!!!!!!!!!!!!!!!!!!
             Destroy(gameObject);
