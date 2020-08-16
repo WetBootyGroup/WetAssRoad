@@ -574,6 +574,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3087091907898153918, guid: c823e25d8a3c84248aae99c61f79620c, type: 3}
+      propertyPath: cameraOffset.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087091907898153918, guid: c823e25d8a3c84248aae99c61f79620c, type: 3}
+      propertyPath: cameraOffset.z
+      value: -0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 3087091907898153919, guid: c823e25d8a3c84248aae99c61f79620c, type: 3}
       propertyPath: m_Name
       value: NewMainCamera
