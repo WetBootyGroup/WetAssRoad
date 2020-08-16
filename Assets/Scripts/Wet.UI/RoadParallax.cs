@@ -10,13 +10,13 @@ namespace Wet.UI
         public float magnitudeMax = 5f;
         public Transform movingReference;
 
-        private RectTransform _localTransform;
+        private Transform _localTransform;
         private float _xOffset;
 
         private void Start()
         {
             Assert.IsNotNull(movingReference, "Missing moving reference in " + name);
-            _localTransform = GetComponent<RectTransform>();
+            _localTransform = transform;
             _xOffset = movingReference.position.x;
         }
 
@@ -26,9 +26,12 @@ namespace Wet.UI
                 (movingReference.position.x - _xOffset) * intensity,
                 -magnitudeMax,
                 magnitudeMax);
-            _localTransform.anchoredPosition = new Vector2(
+            Vector3 localPosition = _localTransform.localPosition;
+            localPosition = new Vector3(
                  val,
-                0);
+                localPosition.y,
+                 localPosition.z);
+            _localTransform.localPosition = localPosition;
         }
     }
 }
