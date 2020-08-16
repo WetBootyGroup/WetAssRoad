@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
 namespace Effects
@@ -7,13 +9,16 @@ namespace Effects
     public class CameraEffects : MonoBehaviour
     {
         public float transitionSpeed = 1f;
+
+        [Header("Required")] public Transform target;
+        public Vector3 cameraOffset = Vector3.zero;
         
         private ShakeState _shakeState;
         private float _shakeEndTime = 0f;
         private Vector2 _noiseScale = new Vector2(2f, 3f);
         private Vector2 _shakeSpeed = Vector2.one;
         private float _sqrShakeSpeed = 1f;
-        private Vector3 _offset = Vector3.zero;
+        private Vector3 _shakeOffset = Vector3.zero;
 
         private enum ShakeState
         {
@@ -25,7 +30,7 @@ namespace Effects
 
         private void Start()
         {
-
+            Assert.IsNotNull(target, "No target in CameraEffect");
             _sqrShakeSpeed = transitionSpeed * transitionSpeed;
         }
 
@@ -34,24 +39,29 @@ namespace Effects
             // optimizable
             float sampleX = _noiseScale.x * Mathf.PerlinNoise(Time.time * _shakeSpeed.x, 0);
             float sampleY = _noiseScale.y * Mathf.PerlinNoise(0, Time.time * _shakeSpeed.y);
-            Vector3 shakeVector = new Vector3(sampleX, sampleY) - _offset;
+            Vector3 shakeVector = new Vector3(sampleX, sampleY) - _shakeOffset;
+            Vector3 cameraResting = target.position + cameraOffset;
+            Vector3 cameraRelativeTarget = target.position + cameraOffset + shakeVector + _shakeOffset;
             
             switch (_shakeState)
             {
                 case ShakeState.NoShake:
+                    transform.position = cameraResting;
                     break;
                 
                 case ShakeState.GoToNoise:
-                    transform.localPosition = Vector3.MoveTowards(transform.localPosition, shakeVector, transitionSpeed);
+                    transform.position = Vector3.MoveTowards(
+                        transform.position, 
+                        cameraRelativeTarget, transitionSpeed);
 
-                    if (_sqrShakeSpeed > Vector3.SqrMagnitude(transform.localPosition - shakeVector))
+                    if (_sqrShakeSpeed > Vector3.SqrMagnitude(transform.position - cameraRelativeTarget))
                     {
                         _shakeState = ShakeState.NoiseShake;
                     }
                     break;
                 
                 case ShakeState.NoiseShake:
-                    transform.localPosition = shakeVector - _offset;
+                    transform.position = cameraRelativeTarget;
                     if (Time.time > _shakeEndTime)
                     {
                         _shakeState = ShakeState.GoToNoShake;
@@ -59,9 +69,9 @@ namespace Effects
                     break;
                 
                 case ShakeState.GoToNoShake:
-                    transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, transitionSpeed);
+                    transform.position = Vector3.MoveTowards(transform.position, cameraResting, transitionSpeed);
 
-                    if (_sqrShakeSpeed > Vector3.SqrMagnitude(transform.localPosition))
+                    if (_sqrShakeSpeed > Vector3.SqrMagnitude(transform.position))
                     {
                         _shakeState = ShakeState.NoShake;
                     }
@@ -86,7 +96,7 @@ namespace Effects
             _noiseScale = shakeArgument.noiseScale;
             _shakeSpeed = shakeArgument.shakeSpeed;
             // _offset = shakeArgument.noiseScale / 2;
-            _offset = new Vector3(1f, 1f); // todo: improve offset
+            _shakeOffset = new Vector3(1f, 1f); // todo: improve offset
         }
     }
 }

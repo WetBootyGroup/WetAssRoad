@@ -42,7 +42,8 @@ namespace Effects
 
             for (int i = 0; i < argument.Count; i++)
             {
-                PuddleParticle script = Instantiate(puddleEffectPrefab, _cameraTransform)
+                PuddleParticle script = Instantiate(puddleEffectPrefab, _cameraTransform.position,
+                        _cameraTransform.rotation, _cameraTransform)
                     .GetComponent<PuddleParticle>();
                 script.ApplyEffect(argument);
                 script.StartEffect();
