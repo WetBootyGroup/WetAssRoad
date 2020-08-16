@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noCountArgMax: 5
+  locator: {fileID: 11400000, guid: 870e7687b131b2d40aabb90a4f736e46, type: 2}
   puddleEffectPrefab: {fileID: 1896127286221232263, guid: 695608a57a4cea442affe91599c680f6, type: 3}
   catAudioPrefab: {fileID: 3959036287970540590, guid: 69a36332a38652c468cdd396cfa04f5b, type: 3}
   puddleAudioPrefab: {fileID: 2769254053658326084, guid: 3828170272866a84e9ba1f3f02c56295, type: 3}

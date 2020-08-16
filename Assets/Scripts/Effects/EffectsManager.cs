@@ -11,8 +11,9 @@ namespace Effects
     {
         [Tooltip("Count when no count applied in argument")]
         public int noCountArgMax = 5;
-        
-        [Header("Required")]
+
+        [Header("Required")] 
+        public EffectsManagerLocator locator;
         public GameObject puddleEffectPrefab;
         public GameObject catAudioPrefab;
         public GameObject puddleAudioPrefab;
@@ -20,6 +21,11 @@ namespace Effects
         [Header("Arguments")]
         public AudioArgument catAudioArgument;
         public AudioArgument puddleAudioArgument;
+
+        [Header("Optional arguments")] 
+        public ShakeArgument shakeArgument;
+
+        public PuddleArgument puddleArgument;
 
         private Transform _cameraTransform;
         private CameraEffects _cameraEffects;
@@ -37,6 +43,13 @@ namespace Effects
             }
             
             Assert.IsNotNull(catAudioPrefab, "Cat Audio Argument is null in " + name);
+
+            locator.SetEffectsManager(this);
+        }
+
+        private void OnDestroy()
+        {
+            locator.SetEffectsManager(null);
         }
 
         public void ProducePuddleEffect(PuddleArgument argument)
@@ -62,7 +75,17 @@ namespace Effects
             }
         }
 
-        public void ProduceShakeEffect(ShakeArgument shakeArgument)
+        public void ProducePuddleEffect()
+        {
+            ProducePuddleEffect(puddleArgument);
+        }
+
+        public void ProduceShakeEffect(ShakeArgument argument)
+        {
+            _cameraEffects.Shake(argument);
+        }
+
+        public void ProduceShakeEffect()
         {
             _cameraEffects.Shake(shakeArgument);
         }

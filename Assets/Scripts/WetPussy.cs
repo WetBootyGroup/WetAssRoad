@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Effects;
 using UnityEngine;
 
 public class WetPussy : MonoBehaviour, ICrashable
 {
     public float moveSpeed;
+
+    [Header("Effects")] 
+    public EffectsManagerLocator effectsManagerLocator;
     
     Transform carRef;
     ProgressManager progressManagerRef;
+    
+    private EffectsManager _effectsManager;
 
     void Start()
     {
         carRef = GameObject.Find("Car").transform;
         progressManagerRef = GameObject.Find("ProgressManager").GetComponent<ProgressManager>();
+
+        _effectsManager = effectsManagerLocator.GetEffectsManager();
     }
 
     void FixedUpdate () {
@@ -25,5 +33,8 @@ public class WetPussy : MonoBehaviour, ICrashable
 
     public void onCrash () {
         progressManagerRef.IncreaseKillCount();
+        
+        // you can have your custom arguments, too!
+        _effectsManager.ProduceCatSound(transform);
     }
 }

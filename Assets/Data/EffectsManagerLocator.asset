@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e777a4a0e2d88a4fad63139fefab57c, type: 3}
+  m_Name: EffectsManagerLocator
+  m_EditorClassIdentifier: 
+  effectsManagerPrefab: {fileID: 2967288098974231443, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
