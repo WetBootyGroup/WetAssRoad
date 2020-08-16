@@ -90,5 +90,12 @@ namespace Effects
 
         [Tooltip("Vertical displacement maximum")]
         public float bounceMax = 0.5f;
+
+        [Tooltip("The max angular change via noise")]
+        public float rotationSpeed = 1.0f;
+
+        [Tooltip("The max rotation magnitude around the z-axis. Don't do max please")]
+        [Range(0f,179f)]
+        public float rotationMax = 10f;
     }
 }

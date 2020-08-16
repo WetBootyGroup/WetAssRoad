@@ -851,20 +851,12 @@ PrefabInstance:
       value: EffectsManager
       objectReference: {fileID: 0}
     - target: {fileID: 2967288098974231446, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
-      propertyPath: shakeArgument.noiseScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967288098974231446, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
-      propertyPath: shakeArgument.noiseScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967288098974231446, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
-      propertyPath: shakeArgument.bounceMax
-      value: 0.25
+      propertyPath: shakeArgument.rotationMax
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2967288098974231446, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
       propertyPath: shakeArgument.bounceSpeed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
