@@ -26,7 +26,7 @@ public class TestEffectManagerEditor : Editor
 
         if (GUILayout.Button("Produce cat sound effect"))
         {
-            effectsManager.ProduceCatSound(e.transform, e.catSoundArgument);
+            effectsManager.ProduceCatSound(e.transform);
         }
     }
 }

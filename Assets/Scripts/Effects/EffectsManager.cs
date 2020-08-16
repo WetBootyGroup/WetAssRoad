@@ -14,11 +14,12 @@ namespace Effects
         
         [Header("Required")]
         public GameObject puddleEffectPrefab;
-
-        public GameObject catAudioEffect;
+        public GameObject catAudioPrefab;
+        public GameObject puddleAudioPrefab;
         
-        public CatAudioArgument catAudioArgument;
-
+        [Header("Arguments")]
+        public AudioArgument catAudioArgument;
+        public AudioArgument puddleAudioArgument;
 
         private Transform _cameraTransform;
         private CameraEffects _cameraEffects;
@@ -35,7 +36,7 @@ namespace Effects
                 Debug.LogError("No camera found in effects manager");
             }
             
-            Assert.IsNotNull(catAudioEffect, "Cat Audio Argument is null in " + name);
+            Assert.IsNotNull(catAudioPrefab, "Cat Audio Argument is null in " + name);
         }
 
         public void ProducePuddleEffect(PuddleArgument argument)
@@ -47,6 +48,10 @@ namespace Effects
                 argument.Count = Random.Range(1, noCountArgMax + 1);
             }
 
+            AudioObject audioObject = Instantiate(puddleAudioPrefab)
+                .GetComponent<AudioObject>();
+            audioObject.StartAudio(catAudioArgument);
+            
             for (int i = 0; i < argument.Count; i++)
             {
                 PuddleParticle script = Instantiate(puddleEffectPrefab, _cameraTransform.position,
@@ -62,11 +67,11 @@ namespace Effects
             _cameraEffects.Shake(shakeArgument);
         }
 
-        public void ProduceCatSound(Transform source, CatAudioArgument argument)
+        public void ProduceCatSound(Transform source, AudioArgument argument)
         {
-            CatAudio catAudio = Instantiate(catAudioEffect, source.position, source.rotation)
-                .GetComponent<CatAudio>();
-            catAudio.StartAudio(argument);
+            AudioObject audioObject = Instantiate(catAudioPrefab, source.position, source.rotation)
+                .GetComponent<AudioObject>();
+            audioObject.StartAudio(argument);
         }
 
         public void ProduceCatSound(Transform source)

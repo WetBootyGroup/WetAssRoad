@@ -5,17 +5,17 @@ using Random = UnityEngine.Random;
 namespace Effects
 {
     [RequireComponent(typeof(AudioSource))]
-    public class CatAudio : MonoBehaviour
+    public class AudioObject : MonoBehaviour
     {
         private bool _audioStarted = false;
         private AudioSource _audioSource;
-        private CatAudioArgument _catAudioArgument;
+        private AudioArgument _audioArgument;
 
         void Update()
         {
             if (_audioStarted)
             {
-                transform.Translate(0f, 0f, -_catAudioArgument.moveSpeed * Time.deltaTime);
+                transform.Translate(0f, 0f, -_audioArgument.moveSpeed * Time.deltaTime);
                 
                 if (!_audioSource.isPlaying)
                 {
@@ -24,7 +24,7 @@ namespace Effects
             }
         }
 
-        public void StartAudio(CatAudioArgument argument)
+        public void StartAudio(AudioArgument argument)
         {
             _audioSource = GetComponent<AudioSource>();
             _audioSource.volume = Random.Range(
@@ -33,14 +33,14 @@ namespace Effects
             _audioSource.pitch = Random.Range(
                 Math.Min(argument.minRandomPitch, argument.maxRandomPitch),
                 Math.Max(argument.minRandomPitch, argument.maxRandomPitch));
-            _catAudioArgument = argument;
+            _audioArgument = argument;
             _audioSource.Play();
             _audioStarted = true;
         }
     }
 
     [Serializable]
-    public class CatAudioArgument
+    public class AudioArgument
     {
         [Range(0f,1f)]
         public float maxRandomVolume = 1f;

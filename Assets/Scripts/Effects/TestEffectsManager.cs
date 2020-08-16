@@ -9,7 +9,6 @@ namespace Effects
         public EffectsManager effectManager;
         public ShakeArgument shakeArgument;
         public PuddleArgument puddleArgument;
-        public CatAudioArgument catSoundArgument;
 
         // Start is called before the first frame update
         void Start()
