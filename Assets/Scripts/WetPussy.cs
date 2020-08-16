@@ -36,5 +36,12 @@ public class WetPussy : MonoBehaviour, ICrashable
         
         // you can have your custom arguments, too!
         _effectsManager.ProduceCatSound(transform);
+
+        StartCoroutine(destroyOnCrash());
+    }
+
+    IEnumerator destroyOnCrash() {
+        yield return new WaitForSeconds(2);
+        Destroy(this.gameObject);
     }
 }
