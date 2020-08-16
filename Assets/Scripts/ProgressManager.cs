@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class ProgressManager : MonoBehaviour
 {
     static ProgressManager instance = null;
+    public static ProgressManager Instance;
 
-    public static ProgressManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    // time
+    public Text timeText;
+    public bool timeRanOut = false;
+    public float gameTime = 60;
+
+    //{
+    //    get
+    //    {
+    //        return instance;
+    //    }
+    //}
 
     void Awake()
     {
@@ -27,8 +33,7 @@ public class ProgressManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // time
-    float gameTime;
+    
     // killed cats
     int killCount;
 
@@ -42,7 +47,23 @@ public class ProgressManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        gameTime -= Time.deltaTime;
+        while(timeRanOut == false){
+            if(gameTime > 0){
+
+                gameTime -= Time.deltaTime;
+                float minutes = Mathf.FloorToInt(gameTime / 60); 
+                float seconds = Mathf.FloorToInt(gameTime % 60);
+
+                timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+            }
+            else{
+
+                print("Game Over! You won!");
+                timeRanOut = true;
+            }
+        }
+
     }
 
     public void IncreaseKillCount() {
