@@ -42,7 +42,8 @@ namespace Effects
 
             for (int i = 0; i < argument.Count; i++)
             {
-                PuddleParticle script = Instantiate(puddleEffectPrefab, _cameraTransform)
+                PuddleParticle script = Instantiate(puddleEffectPrefab, _cameraTransform.position,
+                        _cameraTransform.rotation, _cameraTransform)
                     .GetComponent<PuddleParticle>();
                 script.ApplyEffect(argument);
                 script.StartEffect();
@@ -51,8 +52,7 @@ namespace Effects
 
         public void ProduceShakeEffect(ShakeArgument shakeArgument)
         {
-            // todo: do shake effect
-            _cameraEffects.Shake(new ShakeArgument());
+            _cameraEffects.Shake(shakeArgument);
         }
     }
 
@@ -71,6 +71,7 @@ namespace Effects
         public float minDuration = 5.0f;
         
         // Do not touch
+        [HideInInspector]
         public EffectsManager effectsManager = null;
     }
     
@@ -83,11 +84,18 @@ namespace Effects
         
         // Max duration of shake
         public float maxDuration = 5.0f;
-        
-        // Perlin noise scale
-        public Vector2 noiseScale = new Vector2(3f, 5f);
-        
-        // Shake speed
-        public Vector2 shakeSpeed = new Vector2(3f, 2f);
+
+        [Tooltip("Vertical displacement speed")]
+        public float bounceSpeed = 5.0f;
+
+        [Tooltip("Vertical displacement maximum")]
+        public float bounceMax = 0.25f;
+
+        [Tooltip("The max angular change via noise")]
+        public float rotationSpeed = 1.0f;
+
+        [Tooltip("The max rotation magnitude around the z-axis. Don't do max please")]
+        [Range(0f,179f)]
+        public float rotationMax = 15f;
     }
 }

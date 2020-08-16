@@ -61,8 +61,10 @@ MonoBehaviour:
   shakeArgument:
     minDuration: 1
     maxDuration: 5
-    noiseScale: {x: 3, y: 5}
-    shakeSpeed: {x: 3, y: 2}
+    bounceSpeed: 5
+    bounceMax: 0.25
+    rotationSpeed: 1
+    rotationMax: 15
   puddleArgument:
     Count: -1
     maxDuration: 10
