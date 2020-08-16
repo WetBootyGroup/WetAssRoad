@@ -850,14 +850,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectsManager
       objectReference: {fileID: 0}
-    - target: {fileID: 2967288098974231446, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
-      propertyPath: shakeArgument.rotationMax
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967288098974231446, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
-      propertyPath: shakeArgument.bounceSpeed
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ba31d3cb0c613543b88caf94659b524, type: 3}
 --- !u!1001 &1192907312
