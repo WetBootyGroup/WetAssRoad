@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86da1d437db90d4a9f7ee2b4e9eda92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTranslation: {x: 0.5, y: 0.1, z: 0.2}
+  maxTranslation: {x: 0.5, y: 0.2, z: 0.2}
   spriteRenderer: {fileID: 5618459348685935906}
   autoStart: 0
-  spawnDuration: 0.75
+  spawnDuration: 0.5
   lifespanDuration: 10
   dripSpeed: 0.05
 --- !u!1 &5647408032885173291
