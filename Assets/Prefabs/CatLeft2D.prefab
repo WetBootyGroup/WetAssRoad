@@ -127,3 +127,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  effectsManagerLocator: {fileID: 11400000, guid: 870e7687b131b2d40aabb90a4f736e46, type: 2}
