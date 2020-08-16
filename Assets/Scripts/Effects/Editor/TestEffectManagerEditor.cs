@@ -23,5 +23,10 @@ public class TestEffectManagerEditor : Editor
         {
             effectsManager.ProduceShakeEffect(e.shakeArgument);
         }
+
+        if (GUILayout.Button("Produce cat sound effect"))
+        {
+            effectsManager.ProduceCatSound(e.transform, e.catSoundArgument);
+        }
     }
 }

@@ -15,6 +15,11 @@ namespace Effects
         [Header("Required")]
         public GameObject puddleEffectPrefab;
 
+        public GameObject catAudioEffect;
+        
+        public CatAudioArgument catAudioArgument;
+
+
         private Transform _cameraTransform;
         private CameraEffects _cameraEffects;
 
@@ -29,6 +34,8 @@ namespace Effects
             {
                 Debug.LogError("No camera found in effects manager");
             }
+            
+            Assert.IsNotNull(catAudioEffect, "Cat Audio Argument is null in " + name);
         }
 
         public void ProducePuddleEffect(PuddleArgument argument)
@@ -53,6 +60,18 @@ namespace Effects
         public void ProduceShakeEffect(ShakeArgument shakeArgument)
         {
             _cameraEffects.Shake(shakeArgument);
+        }
+
+        public void ProduceCatSound(Transform source, CatAudioArgument argument)
+        {
+            CatAudio catAudio = Instantiate(catAudioEffect, source.position, source.rotation)
+                .GetComponent<CatAudio>();
+            catAudio.StartAudio(argument);
+        }
+
+        public void ProduceCatSound(Transform source)
+        {
+            ProduceCatSound(source, catAudioArgument);
         }
     }
 

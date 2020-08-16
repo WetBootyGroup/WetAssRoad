@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2967288098974231440}
   - component: {fileID: 2967288098974231441}
   - component: {fileID: 2967288098974231446}
+  - component: {fileID: 1288304613}
   m_Layer: 0
   m_Name: EffectsManager
   m_TagString: Untagged
@@ -46,6 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noCountArgMax: 5
   puddleEffectPrefab: {fileID: 1896127286221232263, guid: 695608a57a4cea442affe91599c680f6, type: 3}
+  catAudioEffect: {fileID: 0}
+  catAudioArgument:
+    maxRandomVolume: 1
+    minRandomVolume: 1
+    maxRandomPitch: 1
+    minRandomPitch: 1
+    moveSpeed: 5
 --- !u!114 &2967288098974231446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4cae661ca00264a894594343f09adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectManager: {fileID: 2967288098974231441}
   shakeArgument:
     minDuration: 1
     maxDuration: 5
@@ -70,4 +79,21 @@ MonoBehaviour:
     maxDuration: 10
     minDuration: 5
     effectsManager: {fileID: 0}
-  effectManager: {fileID: 2967288098974231441}
+  catSoundArgument:
+    maxRandomVolume: 1
+    minRandomVolume: 0.924
+    maxRandomPitch: 1.378
+    minRandomPitch: 0.942
+    moveSpeed: 15.8
+--- !u!114 &1288304613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967288098974231443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b0e7822831e5741b055154fe671524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
