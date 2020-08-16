@@ -52,8 +52,7 @@ namespace Effects
 
         public void ProduceShakeEffect(ShakeArgument shakeArgument)
         {
-            // todo: do shake effect
-            _cameraEffects.Shake(new ShakeArgument());
+            _cameraEffects.Shake(shakeArgument);
         }
     }
 
@@ -85,11 +84,11 @@ namespace Effects
         
         // Max duration of shake
         public float maxDuration = 5.0f;
-        
-        // Perlin noise scale
-        public Vector2 noiseScale = new Vector2(3f, 5f);
-        
-        // Shake speed
-        public Vector2 shakeSpeed = new Vector2(3f, 2f);
+
+        [Tooltip("Vertical displacement speed")]
+        public float bounceSpeed = 1.0f;
+
+        [Tooltip("Vertical displacement maximum")]
+        public float bounceMax = 0.5f;
     }
 }

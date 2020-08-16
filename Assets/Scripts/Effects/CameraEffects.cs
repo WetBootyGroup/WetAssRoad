@@ -15,10 +15,10 @@ namespace Effects
         
         private ShakeState _shakeState;
         private float _shakeEndTime = 0f;
-        private Vector2 _noiseScale = new Vector2(2f, 3f);
-        private Vector2 _shakeSpeed = Vector2.one;
         private float _sqrShakeSpeed = 1f;
-        private Vector3 _shakeOffset = Vector3.zero;
+
+        private ShakeArgument _shakeArgument = new ShakeArgument();
+        private Vector3 _shakeOffset;
 
         private enum ShakeState
         {
@@ -37,11 +37,10 @@ namespace Effects
         void Update()
         {
             // optimizable
-            float sampleX = _noiseScale.x * Mathf.PerlinNoise(Time.time * _shakeSpeed.x, 0);
-            float sampleY = _noiseScale.y * Mathf.PerlinNoise(0, Time.time * _shakeSpeed.y);
-            Vector3 shakeVector = new Vector3(sampleX, sampleY) - _shakeOffset;
+            float sampleY = _shakeArgument.bounceMax * Mathf.PerlinNoise(0, Time.time * _shakeArgument.bounceSpeed);
+            Vector3 shakeVector = (sampleY * Vector3.up) - _shakeOffset;
             Vector3 cameraResting = target.position + cameraOffset;
-            Vector3 cameraRelativeTarget = target.position + cameraOffset + shakeVector + _shakeOffset;
+            Vector3 cameraRelativeTarget = cameraResting + shakeVector;
             
             switch (_shakeState)
             {
@@ -53,6 +52,7 @@ namespace Effects
                     transform.position = Vector3.MoveTowards(
                         transform.position, 
                         cameraRelativeTarget, transitionSpeed);
+                    Debug.Log(_shakeArgument.bounceSpeed);
 
                     if (_sqrShakeSpeed > Vector3.SqrMagnitude(transform.position - cameraRelativeTarget))
                     {
@@ -71,7 +71,7 @@ namespace Effects
                 case ShakeState.GoToNoShake:
                     transform.position = Vector3.MoveTowards(transform.position, cameraResting, transitionSpeed);
 
-                    if (_sqrShakeSpeed > Vector3.SqrMagnitude(transform.position))
+                    if (_sqrShakeSpeed > Vector3.SqrMagnitude(transform.position - cameraResting))
                     {
                         _shakeState = ShakeState.NoShake;
                     }
@@ -82,21 +82,22 @@ namespace Effects
             }
         }
 
-        public void Shake(ShakeArgument shakeArgument)
+        // bounce up and down and rotate on z axis
+        public void Shake(ShakeArgument argument)
         {
             if (_shakeState == ShakeState.NoShake || _shakeState == ShakeState.GoToNoShake)
             {
                 _shakeEndTime = Time.time;
             }
 
+            Debug.Log(argument.bounceSpeed);
+            _shakeArgument = argument;
             _shakeEndTime = Time.time + Random.Range(
-                shakeArgument.minDuration,
-                shakeArgument.maxDuration);
+                argument.minDuration,
+                argument.maxDuration);
             _shakeState = ShakeState.GoToNoise; // race condition vs Update solution
-            _noiseScale = shakeArgument.noiseScale;
-            _shakeSpeed = shakeArgument.shakeSpeed;
-            // _offset = shakeArgument.noiseScale / 2;
-            _shakeOffset = new Vector3(1f, 1f); // todo: improve offset
+            _shakeOffset = new Vector3(0, argument.bounceMax/4); // todo: improve offset
+            _sqrShakeSpeed = argument.bounceSpeed * argument.bounceSpeed;
         }
     }
 }
