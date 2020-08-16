@@ -6,9 +6,6 @@ public class CameraScript : MonoBehaviour
 {
     public float playerspeed;
 
-    public Transform groundTrans;
-
-
     void OnCollisionEnter(Collision collision) 
 {   
         if(collision.collider.tag == "Roadside") 
@@ -20,9 +17,7 @@ public class CameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       float width = groundTrans.localScale.x;
-       float center = width/2;
-       print(center);
+
     }
 
     // Update is called once per frame

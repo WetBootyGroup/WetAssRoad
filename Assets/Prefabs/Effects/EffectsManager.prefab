@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2967288098974231443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2967288098974231440}
+  - component: {fileID: 2967288098974231441}
+  - component: {fileID: 2967288098974231446}
+  - component: {fileID: 1288304613}
+  m_Layer: 0
+  m_Name: EffectsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2967288098974231440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967288098974231443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2967288098974231441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967288098974231443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2481e511993d14394d253fe834d40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noCountArgMax: 5
+  puddleEffectPrefab: {fileID: 1896127286221232263, guid: 695608a57a4cea442affe91599c680f6, type: 3}
+  catAudioPrefab: {fileID: 3959036287970540590, guid: 69a36332a38652c468cdd396cfa04f5b, type: 3}
+  puddleAudioPrefab: {fileID: 2769254053658326084, guid: 3828170272866a84e9ba1f3f02c56295, type: 3}
+  catAudioArgument:
+    maxRandomVolume: 1
+    minRandomVolume: 1
+    maxRandomPitch: 1
+    minRandomPitch: 1
+    moveSpeed: 5
+  puddleAudioArgument:
+    maxRandomVolume: 1
+    minRandomVolume: 0.9
+    maxRandomPitch: 1.3
+    minRandomPitch: 1
+    moveSpeed: 0
+--- !u!114 &2967288098974231446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967288098974231443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4cae661ca00264a894594343f09adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectManager: {fileID: 2967288098974231441}
+  shakeArgument:
+    minDuration: 1
+    maxDuration: 5
+    bounceSpeed: 5
+    bounceMax: 0.25
+    rotationSpeed: 1
+    rotationMax: 15
+  puddleArgument:
+    Count: 5
+    maxDuration: 10
+    minDuration: 5
+    effectsManager: {fileID: 0}
+--- !u!114 &1288304613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967288098974231443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b0e7822831e5741b055154fe671524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
