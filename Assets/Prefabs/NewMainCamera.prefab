@@ -98,4 +98,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionSpeed: 0.05
   target: {fileID: 0}
-  cameraOffset: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 2.3, z: -3.5}
