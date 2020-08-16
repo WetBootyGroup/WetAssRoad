@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7082904644791119462}
   m_Layer: 0
   m_Name: CatLeft2D
-  m_TagString: Untagged
+  m_TagString: Crashable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

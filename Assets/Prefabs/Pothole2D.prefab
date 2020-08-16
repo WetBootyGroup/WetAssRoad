@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6707337027059312568}
   - component: {fileID: 1011121003279186257}
   - component: {fileID: 6033939553836748330}
-  - component: {fileID: 9210627301782965037}
+  - component: {fileID: -1381238292215616119}
   m_Layer: 0
   m_Name: Pothole2D
-  m_TagString: Untagged
+  m_TagString: Crashable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
---- !u!114 &9210627301782965037
+--- !u!114 &-1381238292215616119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5113154037562719343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e9997028553314d96fd4191a8c967b, type: 3}
+  m_Script: {fileID: 11500000, guid: ec4994576c1822947af20fddd28e9a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
