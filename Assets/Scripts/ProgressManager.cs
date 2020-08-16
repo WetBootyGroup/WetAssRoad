@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ProgressManager : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class ProgressManager : MonoBehaviour
     // game speed (difficulty)
     public float gameSpeed;
 
+    public GameObject gameOverGood;
+    public GameObject gameOverBad;
+
     void Start()
     {
         gameSpeed = 4;
@@ -52,20 +56,23 @@ public class ProgressManager : MonoBehaviour
             if(gameTime > 0){
 
                 gameTime -= Time.deltaTime;
-                float minutes = Mathf.FloorToInt(gameTime / 60); 
-                float seconds = Mathf.FloorToInt(gameTime % 60);
-
-                timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
             }
             else{
-
-                print("Game Over! You won!");
+                gameTime = 0;
                 timeRanOut = true;
             }
+
+            float minutes = Mathf.FloorToInt(gameTime / 60); 
+            float seconds = Mathf.FloorToInt(gameTime % 60);
+            timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
 
         pussyCount.text = killCount.ToString();
+
+        if (timeRanOut || killCount >= 10) {
+            StartCoroutine("gameOverScreen");
+        }
     }
 
     public void IncreaseKillCount() {
@@ -78,5 +85,18 @@ public class ProgressManager : MonoBehaviour
 
     public float GetGameSpeed() {
         return gameSpeed;
+    }
+
+    IEnumerator gameOverScreen() {
+        //show game over screen
+        if (killCount >= 10) {
+            gameOverBad.SetActive(true);
+        }
+        else if (timeRanOut) {
+            gameOverGood.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("TitleScreen");
     }
 }
